@@ -1,0 +1,656 @@
+# 赤土崎全齡社福樞紐 - 建築配置檔
+# Building Configuration for NVIDIA Isaac Sim
+# Date: 2025-11-23
+
+building_info:
+  name: "赤土崎多功能館"
+  total_area: 3100  # 平方公尺
+  floors: 5  # B1 + 4F
+  height: 18  # 公尺
+  capacity: 180  # 最大容納人數
+  
+# 建築物基本尺寸
+building_dimensions:
+  foundation:
+    length: 40  # 公尺
+    width: 25   # 公尺
+    depth: 3    # 地下深度
+  
+  floor_heights:
+    B1: 3.0
+    1F: 3.5
+    2F: 3.5
+    3F: 3.5
+    4F: 4.0
+
+# 各樓層配置
+floors:
+  B1_parking:
+    level: -1
+    height: 3.0
+    area: 600
+    z_offset: -3.0
+    spaces:
+      - name: "parking_area"
+        type: "parking"
+        area: 450
+        position: [0, 0, -3]
+        dimensions: [30, 15, 3]
+        features:
+          parking_spots:
+            regular: 20
+            handicapped: 5
+            family: 5
+          lighting: "LED 150 lux"
+          ventilation: "6 air changes/hour"
+          
+      - name: "equipment_room"
+        type: "utility"
+        area: 150
+        position: [15, 0, -3]
+        dimensions: [10, 15, 3]
+        equipment:
+          - name: "hvac_system"
+            count: 2
+            power: "150RT"
+          - name: "electrical_room"
+            capacity: "800A"
+          - name: "water_tank"
+            capacity: "20 tons"
+          - name: "emergency_generator"
+            power: "100KW"
+
+  floor_1_elderly:
+    level: 1
+    height: 3.5
+    area: 800
+    z_offset: 0
+    spaces:
+      - name: "entrance_lobby"
+        type: "public"
+        area: 80
+        position: [0, -10, 0]
+        dimensions: [10, 8, 3.5]
+        features:
+          - reception_desk
+          - waiting_area
+          - information_display
+          
+      - name: "dementia_area"
+        type: "care_unit"
+        area: 200
+        position: [-10, 0, 0]
+        dimensions: [14, 14, 3.5]
+        features:
+          quiet_activity_room:
+            area: 80
+            capacity: 25
+            soundproofing: "STC_65"
+          sensory_room:
+            area: 60
+            equipment:
+              - fiber_optic_lights
+              - bubble_tubes
+              - tactile_walls
+          wandering_corridor:
+            area: 60
+            type: "circular"
+            safety:
+              - continuous_handrails
+              - non_slip_flooring
+              - emergency_buttons
+              
+      - name: "general_daycare"
+        type: "activity_area"
+        area: 300
+        position: [0, 0, 0]
+        dimensions: [20, 15, 3.5]
+        features:
+          group_activity_room:
+            area: 150
+            capacity: 60
+            equipment:
+              - projection_system
+              - sound_system
+              - movable_partitions
+          rehabilitation_room:
+            area: 80
+            equipment:
+              - treadmills: 2
+              - exercise_bikes: 3
+              - parallel_bars: 2
+              - therapy_beds: 2
+          rest_area:
+            area: 70
+            furniture:
+              - recliners: 10
+              - sofas: 3
+              - reading_corner
+              
+      - name: "shared_dining"
+        type: "dining"
+        area: 120
+        position: [10, 0, 0]
+        dimensions: [12, 10, 3.5]
+        capacity: 60
+        tables:
+          regular: 10
+          wheelchair_accessible: 3
+        schedule:
+          - time: "11:30-12:30"
+            users: "elderly"
+          - time: "17:30-18:30"
+            users: "youth"
+            
+      - name: "accessible_garden"
+        type: "outdoor"
+        area: 60
+        position: [15, 10, 0]
+        dimensions: [10, 6, -]
+        features:
+          - raised_planters
+          - sensory_plants
+          - shaded_seating: 6
+          - accessible_paths
+          
+      - name: "support_facilities"
+        type: "support"
+        area: 100
+        position: [0, 8, 0]
+        features:
+          nurse_station:
+            area: 25
+            equipment:
+              - monitoring_system
+              - medical_supplies
+              - emergency_kit
+          accessible_restrooms:
+            count: 6
+            area: 40
+          storage:
+            area: 20
+          staff_room:
+            area: 15
+
+  floor_2_nursery:
+    level: 2
+    height: 3.5
+    area: 700
+    z_offset: 3.5
+    spaces:
+      - name: "elevator_lobby"
+        type: "public"
+        area: 30
+        position: [0, -10, 3.5]
+        dimensions: [6, 5, 3.5]
+        features:
+          - parent_waiting_area
+          - stroller_parking
+          
+      - name: "infant_room_0_1"
+        type: "nursery"
+        age_group: "0-1 years"
+        area: 180
+        position: [-8, 0, 3.5]
+        dimensions: [12, 15, 3.5]
+        capacity: 18
+        features:
+          play_area:
+            area: 80
+            flooring: "EPE foam 3cm"
+            equipment:
+              - crawling_mats
+              - soft_blocks
+              - sensory_toys
+          sleeping_room:
+            area: 60
+            cribs: 15
+            soundproofing: "STC_65"
+            lighting: "dimmable LED"
+          milk_prep_room:
+            area: 20
+            equipment:
+              - bottle_warmers: 3
+              - sterilizers: 2
+              - refrigerator: 1
+          diaper_changing:
+            area: 20
+            stations: 4
+            
+      - name: "toddler_room_1_2"
+        type: "nursery"
+        age_group: "1-2 years"
+        area: 250
+        position: [5, 0, 3.5]
+        dimensions: [16, 15, 3.5]
+        capacity: 32
+        features:
+          play_area:
+            area: 120
+            flooring: "IIC_65"
+            zones:
+              - block_corner
+              - pretend_play
+              - art_area
+          nap_room:
+            area: 80
+            sleeping_mats: 30
+          reading_corner:
+            area: 30
+            books: 500
+          sensory_integration:
+            area: 20
+            equipment:
+              - balance_beams
+              - climbing_structures
+              
+      - name: "outdoor_play_area"
+        type: "outdoor"
+        area: 85
+        position: [12, 8, 3.5]
+        dimensions: [10, 8.5, -]
+        features:
+          - sandbox
+          - water_play_area
+          - climbing_equipment
+          - shade_structures
+          
+      - name: "shared_facilities"
+        type: "support"
+        area: 170
+        features:
+          children_dining:
+            area: 60
+            capacity: 50
+            child_seats: 20
+          prep_kitchen:
+            area: 25
+          health_room:
+            area: 15
+            isolation_capable: true
+          parent_restrooms:
+            area: 30
+            count: 4
+          storage:
+            area: 20
+          staff_rest:
+            area: 10
+
+  floor_3_family:
+    level: 3
+    height: 3.5
+    area: 500
+    z_offset: 7.0
+    spaces:
+      - name: "multipurpose_room"
+        type: "community"
+        area: 150
+        position: [0, 0, 7]
+        dimensions: [15, 10, 3.5]
+        features:
+          - movable_partitions
+          - projection_system
+          - sound_system
+          - stage_platform
+        capacity: 80
+        uses:
+          - family_gatherings
+          - workshops
+          - performances
+          
+      - name: "community_kitchen"
+        type: "kitchen"
+        area: 80
+        position: [8, 0, 7]
+        dimensions: [8, 10, 3.5]
+        equipment:
+          cooking:
+            - commercial_stove: 2
+            - ovens: 2
+            - steamers: 1
+          preparation:
+            - prep_stations: 4
+            - sinks: 3
+          storage:
+            - freezer: 1
+            - refrigerator: 2
+            - dry_storage: 1
+        capacity: 100  # meals per service
+        
+      - name: "consultation_rooms"
+        type: "office"
+        area: 60
+        position: [-8, 0, 7]
+        dimensions: [8, 7.5, 3.5]
+        rooms:
+          - name: "counseling_room_1"
+            area: 20
+            soundproofing: "STC_60"
+          - name: "counseling_room_2"
+            area: 20
+            soundproofing: "STC_60"
+          - name: "family_room"
+            area: 20
+            capacity: 6
+            
+      - name: "social_services"
+        type: "office"
+        area: 110
+        position: [0, 5, 7]
+        features:
+          - case_management_office
+          - resource_library
+          - computer_stations: 5
+          - meeting_room
+          
+      - name: "outdoor_terrace"
+        type: "outdoor"
+        area: 100
+        position: [0, 10, 7]
+        features:
+          - garden_beds
+          - seating_areas
+          - event_space
+
+  floor_4_youth:
+    level: 4
+    height: 4.0
+    area: 500
+    z_offset: 10.5
+    spaces:
+      - name: "basketball_court"
+        type: "sports"
+        area: 150
+        position: [0, 0, 10.5]
+        dimensions: [15, 10, 4]
+        features:
+          court:
+            type: "half_court"
+            flooring: "PU_sports"
+            hoops: 2
+            adjustable_height: true
+          soundproofing:
+            floor: "IIC_70"
+            walls: "acoustic_panels"
+          lighting: "LED 500 lux"
+        schedule:
+          - "17:00-19:00 basketball"
+          - "19:00-21:00 multi-sport"
+          
+      - name: "dance_studio"
+        type: "activity"
+        area: 50
+        position: [-10, 0, 10.5]
+        dimensions: [7, 7, 4]
+        features:
+          - mirror_walls: 3
+          - ballet_barres: 2
+          - dance_flooring: "sprung"
+          - sound_system
+        classes:
+          - street_dance
+          - modern_dance
+          - k_pop
+          
+      - name: "fitness_area"
+        type: "gym"
+        area: 20
+        position: [-10, 5, 10.5]
+        equipment:
+          cardio:
+            - treadmill: 1
+            - bikes: 2
+          weights:
+            - dumbbells: "3-10kg sets"
+            - kettlebells: "5-15kg"
+          accessories:
+            - yoga_mats: 10
+            - resistance_bands: 10
+            
+      - name: "study_room"
+        type: "educational"
+        area: 60
+        position: [8, 5, 10.5]
+        dimensions: [8, 7.5, 4]
+        capacity: 40
+        features:
+          individual_desks: 30
+          group_tables: 2
+          computer_stations: 10
+          quiet_zones: true
+        environment:
+          lighting: "500 lux task lighting"
+          soundproofing: "STC_50"
+          hvac: "individual zone control"
+          
+      - name: "computer_lab"
+        type: "educational"
+        area: 50
+        position: [8, -5, 10.5]
+        dimensions: [7, 7, 4]
+        equipment:
+          computers: 20
+          specs:
+            cpu: "i5 or equivalent"
+            ram: "16GB"
+            gpu: "dedicated graphics"
+          software:
+            - office_suite
+            - adobe_creative
+            - programming_ide
+          network: "1Gbps fiber"
+          
+      - name: "maker_space"
+        type: "creative"
+        area: 40
+        position: [0, -8, 10.5]
+        dimensions: [8, 5, 4]
+        equipment:
+          fabrication:
+            - 3d_printers: 2
+            - laser_cutter: 1
+          electronics:
+            - arduino_kits: 10
+            - soldering_stations: 4
+          robotics:
+            - lego_ev3: 5
+          tools:
+            - hand_tools
+            - power_tools
+        safety:
+          - ventilation_system
+          - safety_equipment
+          - first_aid_kit
+          
+      - name: "social_area"
+        type: "recreation"
+        area: 80
+        position: [0, 8, 10.5]
+        features:
+          lounge:
+            area: 50
+            furniture:
+              - sofas: 3
+              - bean_bags: 10
+            entertainment:
+              - game_consoles: 2
+              - board_games: 100
+              - pool_table: 1
+          music_room:
+            area: 30
+            soundproofing: "STC_65"
+            equipment:
+              - drum_kit: 1
+              - keyboards: 2
+              - amplifiers: 3
+
+# 人物配置
+characters:
+  elderly:
+    count: 50-60
+    floor: "1F"
+    age_range: "65-95"
+    mobility:
+      independent: 60%
+      walker: 25%
+      wheelchair: 15%
+    schedule:
+      arrival: "09:00"
+      departure: "17:00"
+    
+  toddlers:
+    count: 40-50
+    floor: "2F"
+    age_range: "0-2"
+    groups:
+      infants: 18
+      toddlers: 32
+    schedule:
+      arrival: "07:30"
+      departure: "17:30"
+    
+  youth:
+    count: 30-40
+    floor: "4F"
+    age_range: "12-18"
+    activities:
+      sports: 40%
+      study: 35%
+      creative: 25%
+    schedule:
+      arrival: "17:00"
+      departure: "21:00"
+    
+  caregivers:
+    count: 29
+    distribution:
+      elderly_care: 8
+      nursery: 7
+      youth_counselors: 3
+      social_workers: 4
+      kitchen: 4
+      admin: 3
+    shifts:
+      morning: "07:00-15:00"
+      afternoon: "13:00-21:00"
+      
+# 跨齡互動設定
+intergenerational_activities:
+  weekly_schedule:
+    monday:
+      - time: "10:00-11:00"
+        activity: "garden_together"
+        participants: ["elderly", "toddlers"]
+        location: "1F_garden"
+        
+    wednesday:
+      - time: "14:00-14:45"
+        activity: "story_time"
+        participants: ["elderly", "toddlers"]
+        location: "2F_reading_corner"
+        
+    friday:
+      - time: "11:30-13:00"
+        activity: "family_lunch"
+        participants: ["all"]
+        location: "1F_dining"
+        
+    saturday:
+      - time: "15:00-17:00"
+        activity: "talent_show"
+        participants: ["all"]
+        location: "3F_multipurpose"
+
+# 感測器配置
+sensors:
+  cameras:
+    total_count: 80
+    resolution: "1920x1080"
+    fps: 30
+    features:
+      - motion_detection
+      - face_recognition
+      - fall_detection
+      - crowd_analysis
+    
+  environmental:
+    temperature:
+      range: [18, 28]
+      unit: "celsius"
+    humidity:
+      range: [40, 70]
+      unit: "percent"
+    co2:
+      range: [400, 1000]
+      unit: "ppm"
+    noise:
+      range: [30, 85]
+      unit: "decibel"
+      
+  safety:
+    smoke_detectors:
+      interval: "15 sqm"
+    emergency_buttons:
+      interval: "10m"
+    access_control:
+      type: "RFID + biometric"
+
+# 緊急應變
+emergency_protocols:
+  fire:
+    alarm_system: "automatic"
+    sprinklers: "all_areas"
+    evacuation_routes: 2
+    assembly_points:
+      - "outdoor_parking"
+      - "garden"
+      
+  earthquake:
+    structural: "Class II seismic"
+    shelter_areas:
+      - "open_spaces"
+      - "reinforced_zones"
+      
+  medical:
+    first_aid_stations: 4
+    AED_units: 4
+    emergency_contacts:
+      - "119"
+      - "nearest_hospital"
+
+# 材質與物理屬性
+materials:
+  concrete:
+    static_friction: 0.9
+    dynamic_friction: 0.7
+    restitution: 0.2
+    
+  wood:
+    static_friction: 0.5
+    dynamic_friction: 0.3
+    restitution: 0.4
+    
+  rubber:
+    static_friction: 1.0
+    dynamic_friction: 0.8
+    restitution: 0.8
+    
+  metal:
+    static_friction: 0.4
+    dynamic_friction: 0.3
+    restitution: 0.1
+
+# 渲染設定
+rendering:
+  quality: "high"
+  shadows: true
+  reflections: true
+  ambient_occlusion: true
+  anti_aliasing: "TAA"
+  
+# 效能設定
+performance:
+  target_fps: 30
+  physics_substeps: 4
+  lod_levels: 3
+  culling_distance: 100
